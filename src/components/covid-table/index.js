@@ -45,6 +45,7 @@ const CovidTable = () => {
             <TableTitle field='confirmed' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title='Confirmados' />
             <TableTitle field='recovered' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title='Recuperados' />
             <TableTitle field='deaths' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title='Fallecidos' />
+            <TableTitle field='mortality' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title='Mortalidad' />
           </tr>
         </thead>
         <TableList data={list} />

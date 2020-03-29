@@ -21,5 +21,5 @@ const Arrows = ({ currentOrder, currentSort }) => {
 }
 
 export default ({ title, field, handleSort, currentSort, currentOrder }) => (
-  <th onClick={() => handleSort(field)}>{title} <Arrows currentSort={currentSort === field} currentOrder={currentOrder} /></th>
+  <th className={field !== 'country' ? 'has-text-centered' : ''} onClick={() => handleSort(field)}>{title} <Arrows currentSort={currentSort === field} currentOrder={currentOrder} /></th>
 )

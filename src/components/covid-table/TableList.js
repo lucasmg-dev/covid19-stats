@@ -5,9 +5,10 @@ export default ({ data }) => (
     {data.map(el => (
       <tr key={el.country}>
         <td>{el.country}</td>
-        <td>{el.confirmed}</td>
-        <td>{el.recovered}</td>
-        <td>{el.deaths}</td>
+        <td className='has-text-centered'>{el.confirmed}</td>
+        <td className='has-text-centered'>{el.recovered}</td>
+        <td className='has-text-centered'>{el.deaths}</td>
+        <td className='has-text-centered'>{el.mortality.toFixed(1)}%</td>
       </tr>
     ))}
   </tbody>

@@ -5,7 +5,8 @@ export const formatData = data => {
     confirmed: el.attributes.Confirmed,
     deaths: el.attributes.Deaths,
     recovered: el.attributes.Recovered,
-    active: el.attributes.Active
+    active: el.attributes.Active,
+    mortality: el.attributes.Deaths * 100 / el.attributes.Confirmed
   }))
 
   return formattedData
