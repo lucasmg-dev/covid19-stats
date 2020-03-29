@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getData } from '../../api/http'
 import { formatData, sortBy } from '../../api/utils'
 import TableHero from './TableHero'
@@ -36,20 +36,20 @@ const CovidTable = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <TableHero data={list} />
       <table className='table is-striped is-fullwidth'>
-	<thead>
-	  <tr>
-	    <TableTitle field='country' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title="País" />
-	    <TableTitle field='confirmed' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title="Confirmados" />
-	    <TableTitle field='recovered' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title="Recuperados" />
-	    <TableTitle field='deaths' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title="Fallecidos" />
-	  </tr>
-	</thead>
-	<TableList data={list} />
+        <thead>
+          <tr>
+            <TableTitle field='country' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title='País' />
+            <TableTitle field='confirmed' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title='Confirmados' />
+            <TableTitle field='recovered' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title='Recuperados' />
+            <TableTitle field='deaths' handleSort={handleSort} currentSort={currentSort} currentOrder={currentOrder} title='Fallecidos' />
+          </tr>
+        </thead>
+        <TableList data={list} />
       </table>
-    </Fragment>
+    </>
   )
 }
 
