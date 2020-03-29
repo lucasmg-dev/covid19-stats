@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getData } from '../../api/http'
-import { formatData, sortBy } from '../../api/utils'
+import { formatData, sortBy, filterData } from '../../api/utils'
 import TableHero from './TableHero'
 import TableTitle from './TableTitle'
 import TableList from './TableList'
+import TableSearch from './TableSearch'
 
 const CovidTable = () => {
   const [list, setList] = useState([])
   const [currentSort, setCurrentSort] = useState('confirmed')
   const [currentOrder, setCurrentOrder] = useState('desc')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [loading, setLoading] = useState(true)
+  const originalData = useRef([])
 
   function handleSort (key) {
     if (key === currentSort) {
@@ -22,22 +26,37 @@ const CovidTable = () => {
     setCurrentOrder('desc')
   }
 
+  function handleOnChange (value) {
+    setSearchQuery(value)
+  }
+
+  async function fetchData () {
+    const data = await getData()
+    const formattedData = formatData(data)
+    originalData.current = formattedData
+    const sortedData = sortBy(formattedData, currentSort, currentOrder)
+    setList(sortedData)
+    setLoading(false)
+  }
+
   useEffect(() => {
-    (async () => {
-      const data = await getData()
-      const formattedData = formatData(data)
-      const sortedData = sortBy(formattedData, currentSort, currentOrder)
-      setList(sortedData)
-    })()
+    fetchData()
   }, [])
 
-  if (list.length < 1) {
+  useEffect(() => {
+    if (loading) return
+    const filtered = filterData(originalData.current, searchQuery)
+    setList(filtered)
+  }, [searchQuery])
+
+  if (loading) {
     return <p className='text-center'>Cargando...</p>
   }
 
   return (
     <>
-      <TableHero data={list} />
+      <TableHero data={originalData.current} />
+      <TableSearch value={searchQuery} handleOnChange={handleOnChange} />
       <table className='table is-striped is-fullwidth'>
         <thead>
           <tr>

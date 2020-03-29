@@ -21,3 +21,7 @@ export const sortBy = (data, key, order = 'desc') => {
   if (order === 'asc') return sorted.reverse()
   return sorted
 }
+
+export const filterData = (data, value) => {
+  return data.filter(e => e.country.toLowerCase().indexOf(value.toLowerCase()) !== -1)
+}
